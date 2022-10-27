@@ -1,39 +1,44 @@
 package com.sura.surasy.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name="Productos")
+@Table(name="Producto", schema = "public")
 public class Producto {
 	
 	@Id
 	private int idProducto;
 	
 	private String nombre;
-	private int valoracion;
 	
-	@ManyToMany (mappedBy="dataSetProducto")
-	@JsonIgnore
-	private Set<User> dataSetUser;
+	
+	@OneToMany(mappedBy= "producto")
+	private List<UserProducto> userProducto = new ArrayList<>();
 	
 	public Producto() {
 		
 	}
 	
-	public Producto(int idProducto, String nombre, int valoracion) {
+
+	public Producto(int idProducto, String nombre, List<UserProducto> userProducto) {
 		super();
 		this.idProducto = idProducto;
 		this.nombre = nombre;
-		this.valoracion = valoracion;
+		this.userProducto = userProducto;
 	}
+
+
 
 	public int getIdProducto() {
 		return idProducto;
@@ -51,12 +56,12 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public int getValoracion() {
-		return valoracion;
+	public List<UserProducto> getUserProducto() {
+		return userProducto;
 	}
 
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
+	public void setUserProducto(List<UserProducto> userProducto) {
+		this.userProducto = userProducto;
 	}
 	
 	
