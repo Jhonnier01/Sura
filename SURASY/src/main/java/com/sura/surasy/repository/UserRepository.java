@@ -10,7 +10,9 @@ import com.sura.surasy.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	@Query (value="SELECT id_user, nombre, telefono, citar FROM user WHERE citar = true",nativeQuery = true)
+	@Query (value="SELECT * FROM public.user where citar = true",nativeQuery = true)
 	List<User> findByCitar();
 
 }
+
+//
